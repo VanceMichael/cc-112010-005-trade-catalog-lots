@@ -1,0 +1,292 @@
+{
+  "rounds": [
+    [
+      {
+        "path": "/market/selector",
+        "body": "<!doctype html><html lang=\"zh-CN\"><meta charset=\"utf-8\"><title>目的地市场</title><a data-market=\"TH\" href=\"/market/th/P1\">泰国</a><a data-market=\"JP\" href=\"/market/jp/P1\">日本</a></html>",
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {
+          "content-type": "text/html; charset=utf-8"
+        }
+      },
+      {
+        "path": "/market/th/P1",
+        "body": "<!doctype html><html lang=\"zh-CN\"><meta charset=\"utf-8\"><h1>轴承组件</h1><article data-market=\"TH\" data-lot=\"B7\" data-pack=\"p1\" data-quote=\"W-1\">整托报价</article></html>",
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {
+          "content-type": "text/html; charset=utf-8"
+        }
+      },
+      {
+        "path": "/market/jp/P1",
+        "body": "<!doctype html><html lang=\"zh-CN\"><meta charset=\"utf-8\"><h1>轴承组件</h1><article data-market=\"JP\" data-lot=\"C7\" data-pack=\"p2\" data-quote=\"W-2\">日本盒装报价</article></html>",
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {
+          "content-type": "text/html; charset=utf-8"
+        }
+      },
+      {
+        "path": "/wholesale/products",
+        "body": [
+          {
+            "sku": "P1",
+            "pack": "p1",
+            "market": "TH",
+            "lot": "B7",
+            "tree": [
+              {
+                "id": "pallet",
+                "child": "box",
+                "n": 8
+              },
+              {
+                "id": "box",
+                "child": "kit",
+                "n": 4
+              },
+              {
+                "id": "kit",
+                "child": "part",
+                "n": 3,
+                "splittable": false
+              }
+            ]
+          },
+          {
+            "sku": "P1",
+            "pack": "p2",
+            "market": "JP",
+            "lot": "C7",
+            "tree": [
+              {
+                "id": "box",
+                "child": "kit",
+                "n": 5
+              }
+            ]
+          }
+        ],
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      },
+      {
+        "path": "/wholesale/quote?market=TH&lot=B7&quantity=64",
+        "body": {
+          "id": "W-1",
+          "saleUnit": "pallet",
+          "min": 2,
+          "price": 2000,
+          "currency": "THB",
+          "delivery": "提货",
+          "maximum": 4
+        },
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      },
+      {
+        "path": "/wholesale/quote?market=JP&lot=C7&quantity=64",
+        "body": {
+          "id": "W-2",
+          "saleUnit": "box",
+          "min": 10,
+          "price": 900,
+          "currency": "JPY",
+          "delivery": "包邮",
+          "maximum": 15
+        },
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      },
+      {
+        "path": "/lots",
+        "body": [
+          {
+            "market": "TH",
+            "lot": "B7",
+            "available": 4,
+            "unit": "pallet"
+          },
+          {
+            "market": "JP",
+            "lot": "C7",
+            "available": 15,
+            "unit": "box"
+          }
+        ],
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      },
+      {
+        "path": "/inquiries",
+        "body": [
+          {
+            "id": "I-7",
+            "sku": "P1",
+            "market": "TH",
+            "quantity": 64,
+            "unit": "kit",
+            "signed": true,
+            "quote": "W-1",
+            "lot": "B7",
+            "pack": "p1"
+          },
+          {
+            "id": "I-9",
+            "sku": "P1",
+            "market": "TH",
+            "quantity": 64,
+            "unit": "kit",
+            "signed": false
+          },
+          {
+            "id": "I-10",
+            "sku": "P1",
+            "market": "JP",
+            "quantity": 64,
+            "unit": "kit",
+            "signed": false
+          }
+        ],
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      }
+    ],
+    [
+      {
+        "path": "/market/th/P1",
+        "body": "<!doctype html><html lang=\"zh-CN\"><meta charset=\"utf-8\"><h1>轴承组件</h1><article data-market=\"TH\" data-lot=\"B8\" data-pack=\"p3\" data-quote=\"W-3\">新版整托</article></html>",
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {
+          "content-type": "text/html; charset=utf-8"
+        }
+      },
+      {
+        "path": "/wholesale/products",
+        "body": [
+          {
+            "sku": "P1",
+            "pack": "p3",
+            "market": "TH",
+            "lot": "B8",
+            "tree": [
+              {
+                "id": "pallet",
+                "child": "box",
+                "n": 6
+              },
+              {
+                "id": "box",
+                "child": "kit",
+                "n": 4
+              },
+              {
+                "id": "kit",
+                "child": "part",
+                "n": 3,
+                "splittable": false
+              }
+            ]
+          },
+          {
+            "sku": "P1",
+            "pack": "p2",
+            "market": "JP",
+            "lot": "C7",
+            "tree": [
+              {
+                "id": "box",
+                "child": "kit",
+                "n": 5
+              }
+            ]
+          }
+        ],
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      },
+      {
+        "path": "/lots",
+        "body": [
+          {
+            "market": "TH",
+            "lot": "B7",
+            "available": 1,
+            "unit": "pallet"
+          },
+          {
+            "market": "TH",
+            "lot": "B8",
+            "available": 3,
+            "unit": "pallet",
+            "replacement": {
+              "old": "B7",
+              "oldPack": "p1",
+              "units": 32,
+              "unit": "kit",
+              "effectiveBatch": "B8"
+            }
+          },
+          {
+            "market": "JP",
+            "lot": "C7",
+            "available": 15,
+            "unit": "box"
+          }
+        ],
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      },
+      {
+        "path": "/wholesale/quote?market=TH&lot=B8&quantity=64",
+        "body": {
+          "state": "未发布"
+        },
+        "status": 404,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      }
+    ],
+    [
+      {
+        "path": "/wholesale/quote?market=TH&lot=B8&quantity=64",
+        "body": {
+          "id": "W-3",
+          "saleUnit": "pallet",
+          "min": 2,
+          "price": 2190,
+          "currency": "THB",
+          "delivery": "厂商另行承运",
+          "maximum": 3
+        },
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      }
+    ]
+  ],
+  "assets": {}
+}
