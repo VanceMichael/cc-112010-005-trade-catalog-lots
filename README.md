@@ -9,4 +9,6 @@
 /market/selector 公布市场路径，子页面的 data 属性是页面上的市场、批号、包装和报价编号。/wholesale/products 的包装图所给系数是外包装含有多少个直接子单位。/wholesale/quote 需要用 URL 上的 market、lot 和数量组合取得，报价中的 saleUnit 是可出售的整单位。/lots 声明旧批的替代份额，其中 units 使用 unit 指定的计量口径。/inquiries 给出需求和已保存的询价确认。
 批发报价请求的 quantity 采用 kit（整组件）件数，查询仍需要市场和批号。返回中 min 与 maximum 按 saleUnit 计。parts 是组件里的零件，只有包装资料明示可拆售才可单独报价。独立站同一商品地址随批号改版时不改写旧批报价编号。
 
+`/warehouse` 列出实体仓池的实物库存和预留确认，markets 为同仓池的销售去向。预留数量按 unit 指定的仓库单位计，physicalStock 含已预留。fromUnreservedOnly 区分只供未预留份额的替代。
+
 运行 `npm test` 可校验资料源实际应答。样本内容存放在 `samples/`，开发时通过各来源的本地地址进行联调。

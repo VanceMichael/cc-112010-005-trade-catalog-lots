@@ -79,3 +79,12 @@ test('市场入口提供两处独立目的地上下文', async t => {
     assert.equal(market('article').attr('data-market'), link.attr('data-market'))
   }
 })
+
+test('仓池库存随跨市场的确认单变化', async t => {
+  const origin = await openSource(t)
+  await view(origin, 2)
+  const response = await request(origin, '/warehouse')
+  const warehouse = await response.json()
+  assert.deepEqual(warehouse.pools.find(p => p.id === 'W8').markets, ['TH','VN'])
+  assert.equal(warehouse.reservations.find(r => r.receipt === 'R-12').pool, 'W8')
+})

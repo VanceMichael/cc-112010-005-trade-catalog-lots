@@ -3,7 +3,7 @@
     [
       {
         "path": "/market/selector",
-        "body": "<!doctype html><html lang=\"zh-CN\"><meta charset=\"utf-8\"><title>目的地市场</title><a data-market=\"TH\" href=\"/market/th/P1\">泰国</a><a data-market=\"JP\" href=\"/market/jp/P1\">日本</a></html>",
+        "body": "<!doctype html><html lang=\"zh-CN\"><meta charset=\"utf-8\"><title>目的地市场</title><a data-market=\"TH\" href=\"/market/th/P1\">泰国</a><a data-market=\"JP\" href=\"/market/jp/P1\">日本</a><a data-market=\"VN\" href=\"/market/vn/P1\">越南</a></html>",
         "status": 200,
         "method": "GET",
         "request": null,
@@ -159,12 +159,62 @@
             "quantity": 64,
             "unit": "kit",
             "signed": false
+          },
+          {
+            "id": "I-12",
+            "sku": "P1",
+            "market": "VN",
+            "quantity": 48,
+            "unit": "kit",
+            "signed": false
           }
         ],
         "status": 200,
         "method": "GET",
         "request": null,
         "headers": {}
+      },
+      {
+        "path": "/warehouse",
+        "body": {
+          "pools": [
+            {
+              "id": "TH-W1",
+              "lot": "B7",
+              "physicalStock": 4,
+              "unit": "pallet",
+              "markets": [
+                "TH"
+              ]
+            }
+          ],
+          "reservations": [
+            {
+              "inquiry": "I-7",
+              "pool": "TH-W1",
+              "lot": "B7",
+              "pack": "p1",
+              "unit": "pallet",
+              "qty": 1,
+              "state": "confirmed",
+              "receipt": "R-7"
+            }
+          ]
+        },
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      },
+      {
+        "path": "/market/vn/P1",
+        "body": "<!doctype html><meta charset=\"utf-8\"><article data-market=\"VN\" data-lot=\"B8\" data-pack=\"p3\" data-quote=\"W-4\">新版整托</article>",
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {
+          "content-type": "text/html; charset=utf-8"
+        }
       }
     ],
     [
@@ -217,6 +267,30 @@
                 "n": 5
               }
             ]
+          },
+          {
+            "sku": "P1",
+            "pack": "p3",
+            "market": "VN",
+            "lot": "B8",
+            "tree": [
+              {
+                "id": "pallet",
+                "child": "box",
+                "n": 6
+              },
+              {
+                "id": "box",
+                "child": "kit",
+                "n": 4
+              },
+              {
+                "id": "kit",
+                "child": "part",
+                "n": 3,
+                "splittable": false
+              }
+            ]
           }
         ],
         "status": 200,
@@ -243,7 +317,8 @@
               "oldPack": "p1",
               "units": 32,
               "unit": "kit",
-              "effectiveBatch": "B8"
+              "effectiveBatch": "B8",
+              "fromUnreservedOnly": true
             }
           },
           {
@@ -267,6 +342,48 @@
         "method": "GET",
         "request": null,
         "headers": {}
+      },
+      {
+        "path": "/warehouse",
+        "body": {
+          "pools": [
+            {
+              "id": "TH-W1",
+              "lot": "B7",
+              "physicalStock": 1,
+              "unit": "pallet",
+              "markets": [
+                "TH"
+              ]
+            },
+            {
+              "id": "W8",
+              "lot": "B8",
+              "physicalStock": 3,
+              "unit": "pallet",
+              "markets": [
+                "TH",
+                "VN"
+              ]
+            }
+          ],
+          "reservations": [
+            {
+              "inquiry": "I-7",
+              "pool": "TH-W1",
+              "lot": "B7",
+              "pack": "p1",
+              "unit": "pallet",
+              "qty": 1,
+              "state": "confirmed",
+              "receipt": "R-7"
+            }
+          ]
+        },
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
       }
     ],
     [
@@ -279,6 +396,74 @@
           "price": 2190,
           "currency": "THB",
           "delivery": "厂商另行承运",
+          "maximum": 3
+        },
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      },
+      {
+        "path": "/warehouse",
+        "body": {
+          "pools": [
+            {
+              "id": "TH-W1",
+              "lot": "B7",
+              "physicalStock": 1,
+              "unit": "pallet",
+              "markets": [
+                "TH"
+              ]
+            },
+            {
+              "id": "W8",
+              "lot": "B8",
+              "physicalStock": 3,
+              "unit": "pallet",
+              "markets": [
+                "TH",
+                "VN"
+              ]
+            }
+          ],
+          "reservations": [
+            {
+              "inquiry": "I-7",
+              "pool": "TH-W1",
+              "lot": "B7",
+              "pack": "p1",
+              "unit": "pallet",
+              "qty": 1,
+              "state": "confirmed",
+              "receipt": "R-7"
+            },
+            {
+              "inquiry": "I-12",
+              "pool": "W8",
+              "lot": "B8",
+              "qty": 2,
+              "unit": "pallet",
+              "pack": "p3",
+              "state": "confirmed",
+              "receipt": "R-12"
+            }
+          ]
+        },
+        "status": 200,
+        "method": "GET",
+        "request": null,
+        "headers": {}
+      },
+      {
+        "path": "/wholesale/quote?market=VN&lot=B8&quantity=48",
+        "body": {
+          "id": "W-4",
+          "saleUnit": "pallet",
+          "min": 2,
+          "price": 1820000,
+          "currency": "VND",
+          "delivery": "仓库交货",
           "maximum": 3
         },
         "status": 200,
