@@ -7,7 +7,7 @@ import { load } from 'cheerio'
 import { makeSource } from '../source.mjs'
 
 const release = JSON.parse(await readFile(new URL('../samples/sources.json', import.meta.url), 'utf8'))
-const entries = [["/market/selector", "/market/th/P1", "/market/jp/P1", "/wholesale/products", "/wholesale/quote?market=TH&lot=B7&quantity=64", "/wholesale/quote?market=JP&lot=C7&quantity=64", "/lots", "/inquiries"], ["/market/th/P1", "/wholesale/products", "/lots", "/wholesale/quote?market=TH&lot=B8&quantity=64"], ["/wholesale/quote?market=TH&lot=B8&quantity=64"]]
+const entries = [["/market/selector", "/market/th/P1", "/market/jp/P1", "/wholesale/products", "/wholesale/quote?market=TH&lot=B7&quantity=64", "/wholesale/quote?market=JP&lot=C7&quantity=65", "/lots", "/inquiries"], ["/market/th/P1", "/wholesale/products", "/lots", "/wholesale/quote?market=TH&lot=B8&quantity=64"], ["/wholesale/quote?market=TH&lot=B8&quantity=64"], ["/warehouse"]]
 
 async function openSource(t) {
   const server = makeSource()
@@ -87,4 +87,19 @@ test('仓池库存随跨市场的确认单变化', async t => {
   const warehouse = await response.json()
   assert.deepEqual(warehouse.pools.find(p => p.id === 'W8').markets, ['TH','VN'])
   assert.equal(warehouse.reservations.find(r => r.receipt === 'R-12').pool, 'W8')
+})
+
+test('仓库换单留下原收据和不同计量的接续收据', async t => {
+  const origin = await openSource(t)
+  const before = await (await request(origin, '/warehouse')).json()
+  assert.equal(before.pools.find(pool => pool.id === 'JP-W3').unit, 'box')
+  await view(origin, 3)
+  const { pools, reservations } = await (await request(origin, '/warehouse')).json()
+  const first = reservations.find(row => row.receipt === 'R-7')
+  const replacement = reservations.find(row => row.receipt === 'R-7B')
+  assert.equal(replacement.replacesReceipt, first.receipt)
+  assert.equal(replacement.inquiry, first.inquiry)
+  assert.equal(first.state, 'superseded')
+  assert.notEqual(first.pack, replacement.pack)
+  assert.equal(pools.find(pool => pool.id === replacement.pool).physicalStock, 3)
 })

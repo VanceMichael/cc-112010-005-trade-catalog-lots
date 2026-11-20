@@ -11,4 +11,6 @@
 
 `/warehouse` 列出实体仓池的实物库存和预留确认，markets 为同仓池的销售去向。预留数量按 unit 指定的仓库单位计，physicalStock 含已预留。fromUnreservedOnly 区分只供未预留份额的替代。
 
+仓库预留行的 receipt 为确认编号。superseded 不能再计作有效预留，replacesReceipt 说明同一询价已有单据被替换，数量仍按每行自身的包装口径读。不同市场的询价量仍以各自的需求为准。
+
 运行 `npm test` 可校验资料源实际应答。样本内容存放在 `samples/`，开发时通过各来源的本地地址进行联调。

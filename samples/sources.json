@@ -94,7 +94,7 @@
         "headers": {}
       },
       {
-        "path": "/wholesale/quote?market=JP&lot=C7&quantity=64",
+        "path": "/wholesale/quote?market=JP&lot=C7&quantity=65",
         "body": {
           "id": "W-2",
           "saleUnit": "box",
@@ -156,7 +156,7 @@
             "id": "I-10",
             "sku": "P1",
             "market": "JP",
-            "quantity": 64,
+            "quantity": 65,
             "unit": "kit",
             "signed": false
           },
@@ -185,6 +185,15 @@
               "unit": "pallet",
               "markets": [
                 "TH"
+              ]
+            },
+            {
+              "id": "JP-W3",
+              "lot": "C7",
+              "physicalStock": 15,
+              "unit": "box",
+              "markets": [
+                "JP"
               ]
             }
           ],
@@ -365,6 +374,15 @@
                 "TH",
                 "VN"
               ]
+            },
+            {
+              "id": "JP-W3",
+              "lot": "C7",
+              "physicalStock": 15,
+              "unit": "box",
+              "markets": [
+                "JP"
+              ]
             }
           ],
           "reservations": [
@@ -425,6 +443,15 @@
                 "TH",
                 "VN"
               ]
+            },
+            {
+              "id": "JP-W3",
+              "lot": "C7",
+              "physicalStock": 15,
+              "unit": "box",
+              "markets": [
+                "JP"
+              ]
             }
           ],
           "reservations": [
@@ -468,6 +495,80 @@
         },
         "status": 200,
         "method": "GET",
+        "request": null,
+        "headers": {}
+      }
+    ],
+    [
+      {
+        "method": "GET",
+        "path": "/warehouse",
+        "status": 200,
+        "body": {
+          "pools": [
+            {
+              "id": "TH-W1",
+              "lot": "B7",
+              "physicalStock": 0,
+              "unit": "pallet",
+              "markets": [
+                "TH"
+              ]
+            },
+            {
+              "id": "W8",
+              "lot": "B8",
+              "physicalStock": 3,
+              "unit": "pallet",
+              "markets": [
+                "TH",
+                "VN"
+              ]
+            },
+            {
+              "id": "JP-W3",
+              "lot": "C7",
+              "physicalStock": 15,
+              "unit": "box",
+              "markets": [
+                "JP"
+              ]
+            }
+          ],
+          "reservations": [
+            {
+              "inquiry": "I-7",
+              "pool": "TH-W1",
+              "lot": "B7",
+              "pack": "p1",
+              "unit": "pallet",
+              "qty": 1,
+              "state": "superseded",
+              "receipt": "R-7"
+            },
+            {
+              "inquiry": "I-12",
+              "pool": "W8",
+              "lot": "B8",
+              "qty": 2,
+              "unit": "pallet",
+              "pack": "p3",
+              "state": "confirmed",
+              "receipt": "R-12"
+            },
+            {
+              "inquiry": "I-7",
+              "pool": "W8",
+              "lot": "B8",
+              "pack": "p3",
+              "unit": "pallet",
+              "qty": 1,
+              "state": "confirmed",
+              "receipt": "R-7B",
+              "replacesReceipt": "R-7"
+            }
+          ]
+        },
         "request": null,
         "headers": {}
       }
